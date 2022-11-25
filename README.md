@@ -75,3 +75,5 @@ This is my notes of udemy course [Ansible for the DevOps Beginners & System Admi
 - Who this course is for:
   - A begineer who are curious to learn Ansible
   - DevOps Engineer how doesn't know Configuration Management tool
+
+- [Resources](https://github.com/yankils/ansible_for_beginners)

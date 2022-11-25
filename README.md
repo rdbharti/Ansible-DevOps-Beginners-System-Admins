@@ -1,1 +1,1 @@
-# Ansible DevOps Beginners System Admins
+# Ansible for DevOps Beginners and System Admins

@@ -94,3 +94,15 @@ ansible -i ~/hosts all -m ping
   ```
 
   - You can use these as starting points to create your own ansible.cfg file.
+
+# Ansible Modules
+
+- A module is a rusable, standalone **script** that ansible run on your behalf, either locally or remotely.
+- Modules interact with your local machines, an api, or a remote system to perform specific tasks like
+  - Creating Users
+  - Installing Packagaes
+  - Updating Configurations
+  - Spinning up instances
+  - etc
+- Modules are the program that performs the actual work of the tasks of a play.
+- To list modules : ` ansible-doc -l `

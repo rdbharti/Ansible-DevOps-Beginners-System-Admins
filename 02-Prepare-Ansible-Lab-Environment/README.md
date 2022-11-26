@@ -99,3 +99,15 @@ Ansible is an open-source automation platform. It is very, very simple to set up
    ```sh 
    ansible all -m ping
    ```
+
+# Setup Control Nodes (RHEL and UBUNTU)
+
+1. Setup ec2 instance
+2. Setup HostName
+3. Create user: ansadmin
+4. Add user ansadmin to sudoers
+5. Enable password based login
+
+- Copy Ansible-control-node SSH-key to rehel node and ubuntu node.
+- ` ssh-copy-id <rhel-node-ip> `
+- ` ssh-copy-id <ubuntu-node-ip> `

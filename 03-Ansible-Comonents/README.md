@@ -62,3 +62,4 @@ ansible -i ~/hosts all -m ping
   192.168...
 
   ```
+  - execute: ` ansible db-server -m ping ` or ` ansible -i ~/hosts hr -m ping `

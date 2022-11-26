@@ -24,3 +24,8 @@
   - ` ansible all -m yum -a "name=git" -b `
 - User: To create a user : ` ansible all -m user -a "name=john" -b `
 - Setup: Gives entire system-infromation of managed nodes : ` ansible all -m setup `
+
+# Ansible Inventory
+
+Ansible works against multiple managed modules or "hosts" in your infrastructure at the same time, using a list or group of lists known as **Inventory**
+

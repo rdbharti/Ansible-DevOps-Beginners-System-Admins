@@ -111,3 +111,20 @@ Ansible is an open-source automation platform. It is very, very simple to set up
 - Copy Ansible-control-node SSH-key to rehel node and ubuntu node.
 - ` ssh-copy-id <rhel-node-ip> `
 - ` ssh-copy-id <ubuntu-node-ip> `
+
+# Ansible ad-hoc command
+
+- Ad-hoc commans are for tasks that are repeated rarely.
+- Eg. To poweroff all lab machines for Christmas vacation, 
+- You execute a quick one liner in Ansible without writing a playbook.
+` ansible [pattern] -m [module] -m "[module option]" `
+
+- Modules:
+  - Ping
+  - Command
+  - Stat
+  - Yum
+  - User
+  - Setup
+
+- eg : ansible all -m ping 

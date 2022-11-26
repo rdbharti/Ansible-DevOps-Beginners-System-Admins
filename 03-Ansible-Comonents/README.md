@@ -27,5 +27,38 @@
 
 # Ansible Inventory
 
-Ansible works against multiple managed modules or "hosts" in your infrastructure at the same time, using a list or group of lists known as **Inventory**
+- Ansible works against multiple managed modules or "hosts" in your infrastructure at the same time, using a list or group of lists known as **Inventory**
+- Inventory file is a collection of hosts(nodes) which are managged by ansible control node.
+  - Default inventoru : /etc/ansible/hosts
+  - use -i flag: ansible -i \<custom_hosts\>
+  - Define in ansible.cfg file in /etc/ansible/ansible.cfg
 
+```console
+# Create hosts file in home directory
+vi ~/hosts
+192.168.1.11
+:wq
+
+# Execute command
+ansible -i ~/hosts all -m ping
+```
+- Grouping Servers in hosts file
+  - use: [Group-Name]
+  - eg: 
+  ```console
+  [db-server]
+  192.168...
+  192.168...
+  192.168...
+
+  [hr]
+  192.168...
+  192.168...
+  192.168...
+
+  [developer]
+  192.168...
+  192.168...
+  192.168...
+
+  ```

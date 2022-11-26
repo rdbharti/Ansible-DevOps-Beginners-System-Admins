@@ -63,3 +63,34 @@ ansible -i ~/hosts all -m ping
 
   ```
   - execute: ` ansible db-server -m ping ` or ` ansible -i ~/hosts hr -m ping `
+
+# Ansible Configuration File: ansible.cfg
+
+- Default ansible-config file: /etc/ansible/ansible.cfg
+- Custom ansible-config file:
+  - Changes can be made and used in a configuration file which will be searched for in the following order:
+
+  - ANSIBLE_CONFIG (environment variable if set)
+
+  - ansible.cfg (in the current directory)
+
+  - ~/.ansible.cfg (in the home directory)
+
+  - /etc/ansible/ansible.cfg
+
+  - Ansible will process the above list and use the first file found, all others are ignored.
+- To Create custom ansible-configuration file, we will create ansible.cfg in current home directory
+
+  - Generating a sample ansible.cfg file
+  - You can generate a fully commented-out example ansible.cfg file, for example:
+  ```
+  $ ansible-config init --disabled > ansible.cfg
+  ```
+
+  - You can also have a more complete file that includes existing plugins:
+
+  ```
+  $ ansible-config init --disabled -t all > ansible.cfg
+  ```
+
+  - You can use these as starting points to create your own ansible.cfg file.

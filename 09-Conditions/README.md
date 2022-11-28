@@ -84,3 +84,19 @@
       when: ansible_os_family == 'Debian' 
 
 ```
+
+## Adding Copy Task to Apache Playbook
+
+- In this we will copy index.html to /var/www/html
+
+```yaml
+
+# Edit in file: install_apache+httpd_ansible.yaml
+
+- name: "COPY index.html"
+      copy:
+        src: /opt/ansible/index.html
+        dest: /var/www/html/
+        mode: 0666
+
+```

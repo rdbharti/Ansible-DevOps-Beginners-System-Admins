@@ -100,3 +100,28 @@
         mode: 0666
 
 ```
+
+## Lists and with_items
+
+- How to install multiple packages with single task.
+- Add package as a list
+
+```yaml
+
+---
+- name: Packgaes from LIST
+  hosts: rhel
+  become: true
+  tasks:
+    - name: Install packages
+      yum:
+        name:
+          - git
+          - make
+          - gcc
+          - wget
+          - telnet
+          - gzip
+        state: installed
+
+```

@@ -1,0 +1,25 @@
+# ---
+# - name: Packgaes from LIST
+#   hosts: rhel
+#   become: true
+#   tasks:
+#     - name: Install packages
+#       yum:
+#         name: ['git', 'make', 'gcc', 'wget', 'telnet', 'gzip']
+#         state: installed
+
+---
+- name: Packgaes from LIST
+  hosts: rhel
+  become: true
+  tasks:
+    - name: Install packages
+      yum:
+        name:
+          - git
+          - make
+          - gcc
+          - wget
+          - telnet
+          - gzip
+        state: installed

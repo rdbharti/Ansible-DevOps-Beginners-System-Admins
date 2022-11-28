@@ -16,8 +16,8 @@
 ```yaml
 # Create a yaml file vi create_user_ansible.yaml
 ---
-- hosts: all
-  become: true
+- hosts: all # take all the hosts ip from defaults /etc/ansible/hosts
+  become: true # become root
   tasks:
     - user: name=rdbharti
 

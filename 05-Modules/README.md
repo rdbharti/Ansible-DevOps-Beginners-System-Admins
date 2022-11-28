@@ -1,6 +1,6 @@
 # Modules
 
-- We will write ansible playbook using yum module.
+## YUM module.
 
 - Remove git from both the remote hosts
 ```yaml
@@ -41,7 +41,7 @@
 </tbody>
 </table>
 
-# File module: Create/Remove a file/directory
+## File module: Create/Remove a file/directory
 
 - Module Name: FILE
 
@@ -117,5 +117,47 @@ total 0
       file:
         path: /home/ansadmin/dir1
         state: absent
+
+```
+
+## COPY Module:
+
+- Copy a file from
+  - One location to another location
+  - One server to another server
+- We will copy a file from ansible master control node to Target nodes
+- dest: remote absolute path where the file should be copied to.
+- src: Local path to a file to copy to the remote server
+
+```yaml
+
+---
+- name: Playbook to copy  
+  hosts: all
+  become: true
+  tasks:
+    - name: "Copying: /opt/ansible/index.html"
+      copy:
+        src: /opt/ansible/index.html
+        dest: /home/ansadmin
+        mode: 0600
+        owner: rdbharti
+
+```
+
+- Output `ansible all -a "ls -l /home/ansadmin" `
+```console
+
+ansible all -m command -a "ls -l /home/ansadmin/" 
+
+172.31.xx.xx | CHANGED | rc=0 >>
+total 4
+-rw------- 1 rdbharti root     43 Nov 28 06:56 index.html
+
+
+172.31.xx.xx | CHANGED | rc=0 >>
+total 4
+-rw-------. 1 rdbharti root     43 Nov 28 06:56 index.html
+
 
 ```

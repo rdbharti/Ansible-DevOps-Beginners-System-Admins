@@ -1,0 +1,11 @@
+---
+- name: Playbook to copy  
+  hosts: all
+  become: true
+  tasks:
+    - name: "Copying: /opt/ansible/index.html"
+      copy:
+        src: /opt/ansible/index.html
+        dest: /home/ansadmin
+        mode: 0600
+        owner: rdbharti

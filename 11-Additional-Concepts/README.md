@@ -110,14 +110,7 @@ tasks:
 
 ```yaml
 
-tasks:
-    - name: "Install httpd on Redhat"
-      tags: intall_apache # tag
-      yum:
-        name: httpd
-        state: installed
-      when: ansible_os_family == "RedHat"
-    
+tasks:    
     - name: "Start httpd service"
       tags: start_service # tag
       ignore_errors: yes # error handling

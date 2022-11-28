@@ -56,3 +56,38 @@
         path: /home/ansadmin/demofile.txt
         state: touch # for directory use 'directory'
 ```
+
+- Create wile without becoming root
+```yaml
+---
+- name: This playbook creates a file or directory
+  hosts: all
+  # become: true
+  tasks:
+    - name: "Create file: "
+      file:
+        path: /home/ansadmin/demofile_no_root.txt
+        state: touch # for directory use 'directory'
+```
+```console
+# output
+
+ansible all -a "ls -l /home/ansadmin"
+
+172.31... | CHANGED | rc=0 >>
+total 0
+-rw-r--r-- 1 root     root     0 Nov 28 06:16 demofile.txt
+-rw-rw-r-- 1 ansadmin ansadmin 0 Nov 28 06:21 demofile_no_root.txt
+
+172.31... | CHANGED | rc=0 >>
+total 0
+-rw-rw-r--. 1 ansadmin ansadmin 0 Nov 28 06:21 demofile_no_root.txt
+-rw-r--r--. 1 root     root     0 Nov 28 06:16 demofile.txt
+
+```
+
+- We can see if creating file without becoming root the file will be owned by ansadmin
+- and with become: true; the owner of file is root
+
+
+- Create a directory

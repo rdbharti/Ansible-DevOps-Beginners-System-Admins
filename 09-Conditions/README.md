@@ -8,6 +8,7 @@
 - Or you may want to create additional groups of hosts based on whether the hosts match other criteria. 
 - You can do all of these things with conditionals.
 
+## Conditional Install Apache
 - We will create an ansible playbook to install apache on ubuntu and rhel remote servers.
 
 ```yaml
@@ -42,5 +43,44 @@
         name: apache2
         state: started
       when: ansible_os_family == "Debian"
+
+```
+
+## Conditional UnInstall Apache
+
+- We will remove apache from ubuntu and rhel from single playbook
+
+```yaml
+
+# vim uninstall_apache_httpd_ansible.yaml
+
+---
+- name: "Playbook to Uninstall apache"
+  hosts: all
+  become: true
+  tasks:
+    - name: "Stop apache service on RedHat"
+      service: 
+        name: httpd
+        state: stopped
+      when: ansible_os_family == 'RedHat'
+
+    - name: "Uninstall apache from RedHat"
+      yum:
+        name: httpd
+        state: removed
+      when: ansible_os_family == 'RedHat'
+
+    - name: "Stop apache2 on Ubuntu"
+      service:
+        name: apache2
+        state: stopped
+      when: ansible_os_family == 'Debian'
+
+    - name: "Uninstall apache2 from Ubuntu"
+      apt:
+        name: apache2
+        state: absent
+      when: ansible_os_family == 'Debian' 
 
 ```

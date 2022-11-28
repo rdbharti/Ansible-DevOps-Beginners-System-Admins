@@ -1,0 +1,28 @@
+---
+- name: "Playbook to Uninstall apache"
+  hosts: all
+  become: true
+  tasks:
+    - name: "Stop apache service on RedHat"
+      service: 
+        name: httpd
+        state: stopped
+      when: ansible_os_family == 'RedHat'
+
+    - name: "Uninstall apache from RedHat"
+      yum:
+        name: httpd
+        state: removed
+      when: ansible_os_family == 'RedHat'
+
+    - name: "Stop apache2 on Ubuntu"
+      service:
+        name: apache2
+        state: stopped
+      when: ansible_os_family == 'Debian'
+
+    - name: "Uninstall apache2 from Ubuntu"
+      apt:
+        name: apache2
+        state: absent
+      when: ansible_os_family == 'Debian' 

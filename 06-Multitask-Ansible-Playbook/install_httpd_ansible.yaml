@@ -1,0 +1,14 @@
+--- 
+- name: This playbook will install httpd Package
+  hosts: rhel # since yum doesn't work on ubuntu machines
+  become: true
+  tasks:
+    - name: "Installing APACHE HTTPD"
+      yum:
+        name: httpd
+        state: installed
+    
+    - name: "Start httpd service, if not already started"
+      service:
+        name: httpd
+        state: started

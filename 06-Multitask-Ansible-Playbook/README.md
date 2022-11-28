@@ -54,3 +54,43 @@
         state: removed
 
 ```
+
+## Installing Apache on Ubuntu System
+
+- Module Name: apt 
+- state: present
+  - absent
+  - build-dep
+  - latest
+  - present
+  - fixed
+
+```yaml
+
+---
+- name: Install apache2 on Ubuntu remote server
+  hosts: ubuntu
+  become: true
+  tasks:
+    - name: "Install on Ubuntu: Apache2"
+      apt:
+        name: apache2
+        state: present
+
+    - name: "Start service apache2"
+      service:
+        name: apache2
+        state: started
+
+```
+
+- Uninstall apache2 from ubuntu remote server
+  - First Stop the service
+  - then remove the apache2 package
+  
+```yaml
+
+
+
+```
+

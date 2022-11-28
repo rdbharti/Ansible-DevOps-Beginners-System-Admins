@@ -1,0 +1,14 @@
+---
+- name: Install apache2 on Ubuntu remote server
+  hosts: ubuntu
+  become: true
+  tasks:
+    - name: "Install on Ubuntu: Apache2"
+      apt:
+        name: apache2
+        state: present
+
+    - name: "Start service apache2"
+      service:
+        name: apache2
+        state: started

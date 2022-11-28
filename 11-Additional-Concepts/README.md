@@ -102,3 +102,28 @@ tasks:
 ` ansible-playbook install_apache_httpd_ansible.yaml --tags "intall_apache" `
 
 ` ansible-playbook install_apache_httpd_ansible.yaml --tags "start_apache" `
+
+# Error Handling
+
+- Add ` ignore_errors: yes ` in the task
+- example:
+
+```yaml
+
+tasks:
+    - name: "Install httpd on Redhat"
+      tags: intall_apache # tag
+      yum:
+        name: httpd
+        state: installed
+      when: ansible_os_family == "RedHat"
+    
+    - name: "Start httpd service"
+      tags: start_service # tag
+      ignore_errors: yes # error handling
+      service:
+        name: httpd
+        state: started
+      when: ansible_os_family == "RedHat"
+
+```

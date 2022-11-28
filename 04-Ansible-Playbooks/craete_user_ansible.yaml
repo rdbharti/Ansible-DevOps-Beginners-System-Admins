@@ -1,0 +1,7 @@
+# Convert the following command to playbook `ansible all -m user -a "name=rdbharti" -b ` 
+
+---
+- hosts: all
+  become: true
+  tasks:
+    - user: name=rdbharti

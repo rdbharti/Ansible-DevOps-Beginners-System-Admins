@@ -6,3 +6,25 @@
 - You can define these variables in your playbooks, in your inventory, in re-usable files or roles, or at the command line.
 -  You can also create variables during a playbook run by registering the return value or values of a task as a new variable.
 
+- Variables can be used by passing
+  - from external files
+  - from hosts inventory
+  - while running playbook
+  - using group_vars, hosts_vars and so on.
+
+- Example: We will add users through variable
+
+```yaml
+
+---
+- hosts: all
+  become: true
+  vars:
+    user: john # 'user' is a varibale-name
+  tasks:
+    - name: Create User
+      user: 
+        name: "{{ user }}" # referening variable: user
+        shell: /bin/bash
+
+```

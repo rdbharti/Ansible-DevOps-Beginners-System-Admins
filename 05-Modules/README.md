@@ -91,3 +91,15 @@ total 0
 
 
 - Create a directory
+
+```yaml
+
+---
+- name: Ansible Playbook to Create a Directory
+  hosts: all
+  tasks:
+    - name: Create Directory
+      path: /home/ansadmin/dir1
+      state: directory
+
+```

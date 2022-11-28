@@ -99,7 +99,8 @@ total 0
   hosts: all
   tasks:
     - name: Create Directory
-      path: /home/ansadmin/dir1
-      state: directory
+      file:
+        path: /home/ansadmin/dir1
+        state: directory
 
 ```

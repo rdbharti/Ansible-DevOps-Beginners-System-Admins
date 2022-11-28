@@ -90,7 +90,20 @@
   
 ```yaml
 
+---
+- name: "Playbook to uninstall apache2 from ubuntu remote server"
+  hosts: ubuntu
+  become: true
+  tasks:
+    - name: "Stop apache2 service on ubuntu"
+      service:
+        name: apache2
+        state: stopped
 
+    - name: "Uninstall ubuntu package: Apache2"
+      apt:
+        name: apache2
+        state: absent
 
 ```
 

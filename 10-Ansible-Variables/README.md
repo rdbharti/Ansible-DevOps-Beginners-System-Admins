@@ -28,3 +28,31 @@
         shell: /bin/bash
 
 ```
+
+## Variable from external file
+
+1. Create a file: user_var.yaml
+2. Use var_files: in playbook
+
+```yaml
+# vi user_var.yaml
+
+user: bharti
+
+```
+
+```yaml
+
+# vi create_user_ext_var_ansible.yaml
+---
+- hosts: all
+  become: true
+  vars_files:
+    - user_var.yaml
+  tasks:
+    - name: Create User
+      user: 
+        name: "{{ user }}" # referening variable: user
+        shell: /bin/bash
+
+```

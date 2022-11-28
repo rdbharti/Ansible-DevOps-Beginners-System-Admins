@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: true
+  vars_files:
+    - user_var.yaml
+  tasks:
+    - name: Create User
+      user: 
+        name: "{{ user }}" # referening variable: user
+        shell: /bin/bash

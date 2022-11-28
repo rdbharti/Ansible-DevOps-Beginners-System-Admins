@@ -8,3 +8,39 @@
 - Or you may want to create additional groups of hosts based on whether the hosts match other criteria. 
 - You can do all of these things with conditionals.
 
+- We will create an ansible playbook to install apache on ubuntu and rhel remote servers.
+
+```yaml
+
+# vi install_apache_httpd_ansible.yaml
+
+---
+- name: playbook to install apache httpd
+  hosts: all
+  become: true
+  tasks:
+    - name: "Install httpd on Redhat"
+      yum:
+        name: httpd
+        state: installed
+      when: ansible_os_family == "RedHat" # 'ansible_os_family' got from ansible all -m status
+    
+    - name: "Start httpd service"
+      service:
+        name: httpd
+        state: started
+      when: ansible_os_family == "RedHat"
+
+    - name: "install apache2 on debian"
+      apt:
+        name: apache2
+        state: present
+      when: ansible_os_family == "Debian"
+    
+    - name: "Start apache2 service"
+      service:
+        name: apache2
+        state: started
+      when: ansible_os_family == "Debian"
+
+```

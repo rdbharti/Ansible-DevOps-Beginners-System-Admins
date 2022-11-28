@@ -20,7 +20,7 @@
 - hosts: all
   become: true
   vars:
-    user: john # 'user' is a varibale-name
+    user: durlabh # 'user' is a varibale-name
   tasks:
     - name: Create User
       user: 

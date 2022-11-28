@@ -101,7 +101,7 @@
 
 ```
 
-## Lists and with_items
+## Lists
 
 - How to install multiple packages with single task.
 - Add package as a list

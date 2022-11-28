@@ -56,3 +56,9 @@ user: bharti
         shell: /bin/bash
 
 ```
+
+## Parametarised variable input
+
+- ` ansible-playbook <playbook-name> --extra-vars "variable=value" ` or
+- ` ansible-playbook <playbook-name> -e "variable=value" `
+- ` ansible-playbook create_user_ext_var_ansible.yaml --extra-vars "user=sarah" ` 

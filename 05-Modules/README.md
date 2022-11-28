@@ -41,3 +41,18 @@
 </tbody>
 </table>
 
+# File module: Create/Remove a file/directory
+
+- Module Name: FILE
+
+```yaml
+---
+- name: This playbook creates a file or directory
+  hosts: all
+  become: true
+  tasks:
+    - name: "Create file: "
+      file:
+        path: /home/ansadmin/demofile.txt
+        state: touch # for directory use 'directory'
+```

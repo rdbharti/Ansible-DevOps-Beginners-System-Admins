@@ -5,4 +5,5 @@
   become: true
   tasks:
     - name: Create User
-      user: name=rdbharti
+      user: 
+        name: rdbharti

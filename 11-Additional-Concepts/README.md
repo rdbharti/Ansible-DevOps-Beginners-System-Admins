@@ -57,10 +57,48 @@
 
 ```
 
-# Using Tahs in Playbook
+# Using Tags in Playbook
 
 - If you have a large playbook, it may be useful to run only specific parts of it instead of running the entire playbook. 
 - You can do this with Ansible tags. 
 - Using tags to execute or skip selected tasks is a two-step process:
   - Add tags to your tasks, either individually or with tag inheritance from a block, play, role, or import.
   - Select or skip tags when you run your playbook
+- If any tag is mentioned during execution, then tasks without tags will not get executed.
+- ` ansible-playbook <playboon-name> --tags "TAG-NAME"`
+
+```yaml
+tasks:
+    - name: "Install httpd on Redhat"
+      tags: intall_apache # tag
+      yum:
+        name: httpd
+        state: installed
+      when: ansible_os_family == "RedHat"
+    
+    - name: "Start httpd service"
+      tags: start_service # tag
+      service:
+        name: httpd
+        state: started
+      when: ansible_os_family == "RedHat"
+
+    - name: "install apache2 on debian"
+      tags: intall_apache # tag
+      apt:
+        name: apache2
+        state: present
+      when: ansible_os_family == "Debian"
+    
+    - name: "Start apache2 service"
+      tags: start_service # tag
+      service:
+        name: apache2
+        state: started
+      when: ansible_os_family == "Debian"
+
+```
+
+` ansible-playbook install_apache_httpd_ansible.yaml --tags "intall_apache" `
+
+` ansible-playbook install_apache_httpd_ansible.yaml --tags "start_apache" `

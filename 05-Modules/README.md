@@ -104,3 +104,18 @@ total 0
         state: directory
 
 ```
+
+- To Remove a directory
+
+```yaml
+
+---
+- name: Ansible Playbook to Create a Directory
+  hosts: all
+  tasks:
+    - name: Create Directory
+      file:
+        path: /home/ansadmin/dir1
+        state: absent
+
+```

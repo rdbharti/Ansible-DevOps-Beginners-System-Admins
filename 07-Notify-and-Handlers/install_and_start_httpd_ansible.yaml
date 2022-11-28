@@ -1,0 +1,6 @@
+---
+- name: "Playbook to Install and start Httpd service"
+  hosts: rhel
+  become: true
+  tasks:
+    

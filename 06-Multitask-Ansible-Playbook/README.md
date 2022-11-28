@@ -30,3 +30,27 @@
         name: httpd
         state: started
 ```
+
+- Uninstall HTTPD
+  - First Stop the servive
+    - state: stopped
+  - Then Uninstall/remove the package
+  
+```yaml
+
+--- 
+- name: This playbook will uninstall httpd Package
+  hosts: rhel # since yum doesn't work on ubuntu machines
+  become: true
+  tasks:
+    - name: "Stopping httpd service"
+      service:
+        name: httpd
+        state: stopped
+
+    - name: "UnInstalling APACHE HTTPD"
+      yum:
+        name: httpd
+        state: removed
+
+```

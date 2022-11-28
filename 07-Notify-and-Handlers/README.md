@@ -11,3 +11,23 @@
 
 - Example: We will start httpd service only when httpd is installed
 
+```yaml
+
+---
+- name: "Playbook to Install and start Httpd service"
+  hosts: rhel
+  become: true
+  tasks:
+    - name: "install package: httpd"
+      yum:
+        name: httpd
+        state: installed
+      notify: "Start httpd service" # Name of the task to notify
+
+  handlers:
+    - name: "Start httpd service"
+      service:
+        name: httpd
+        state: started
+
+```

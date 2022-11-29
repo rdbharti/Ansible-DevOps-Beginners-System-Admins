@@ -1,9 +1,27 @@
+# ---
+# - name: "Ansible playbook to test ansible vault"
+#   hosts: all
+#   become: true
+#   tasks: 
+#     - name: "clone a git repo" # search google: git module in ansible
+#       git:
+#         repo: https://rdbharti:TOKEN@github.com/rdbharti/gihub-basic-exercise.git
+#         dest: /opt/ansadmin/test-vault
+
+############
+
+# Using variable
+
+############
+
 ---
 - name: "Ansible playbook to test ansible vault"
   hosts: all
   become: true
+  vars_files:
+    - git_tokens.yaml
   tasks: 
     - name: "clone a git repo" # search google: git module in ansible
       git:
-        repo: https://rdbharti:TOKEN@github.com/rdbharti/gihub-basic-exercise.git
+        repo: https://rdbharti:{{ rdbharti_token }}@github.com/rdbharti/gihub-basic-exercise.git
         dest: /opt/ansadmin/test-vault

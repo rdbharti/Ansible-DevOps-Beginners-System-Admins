@@ -1,70 +1,77 @@
+# ---
+# - name: playbook to install apache httpd
+#   hosts: all
+#   become: true
+#   vars: 
+#     port: 8082
+#   tasks:
+#     - name: "Install httpd on Redhat"
+#       yum:
+#         name: httpd
+#         state: installed
+#       when: ansible_os_family == "RedHat"
+#       notify: "Start httpd service"
+  
+#     - name: "install apache2 on debian"
+#       apt:
+#         name: apache2
+#         state: present
+#       when: ansible_os_family == "Debian"
+#       notify: "Start apache2 service"
+
+#     - name: "COPY index.html"
+#       copy:
+#         src: /opt/ansible/index.html
+#         dest: /var/www/html/
+#         mode: 0666
+# # Change RHEL Listen 80 to Listen {{ port }}        
+#     - name: Ensure the default Apache port is {{ port }}
+#       when: ansible_os_family == "RedHat"
+#       lineinfile:
+#         path: /etc/httpd/conf/httpd.conf
+#         regexp: '^Listen '
+#         insertafter: '^#Listen '
+#         line: Listen {{ port }}
+#       notify: "restart apache"
+
+# # Change UBUNTU Listen 80 to Listen {{ port }}        
+#     - name: Ensure the default Apache port is {{ port }}
+#       when: ansible_os_family == "Debian"
+#       lineinfile:
+#         path: /etc/apache2/ports.conf
+#         regexp: '^Listen '
+#         line: Listen {{ port }}
+#       notify: "restart apache2"
+
+
+#   handlers:
+#     - name: "Start httpd service"
+#       service:
+#         name: httpd
+#         state: started
+#       when: ansible_os_family == "RedHat"
+
+#     - name: "restart apache"
+#       service:
+#         name: httpd
+#         state: restarted
+#       when: ansible_os_family == "RedHat"
+
+#     - name: "Start apache2 service"
+#       service:
+#         name: apache2
+#         state: started
+#       when: ansible_os_family == "Debian"
+
+#     - name: "restart apache2"
+#       service:
+#         name: apache2
+#         state: restarted
+#       when: ansible_os_family == "Debian"
+
 ---
-- name: playbook to install apache httpd
+- name: This Playbook will install apache-httpd
   hosts: all
   become: true
-  vars: 
-    port: 8082
-  tasks:
-    - name: "Install httpd on Redhat"
-      yum:
-        name: httpd
-        state: installed
-      when: ansible_os_family == "RedHat"
-      notify: "Start httpd service"
-  
-    - name: "install apache2 on debian"
-      apt:
-        name: apache2
-        state: present
-      when: ansible_os_family == "Debian"
-      notify: "Start apache2 service"
-
-    - name: "COPY index.html"
-      copy:
-        src: /opt/ansible/index.html
-        dest: /var/www/html/
-        mode: 0666
-# Change RHEL Listen 80 to Listen {{ port }}        
-    - name: Ensure the default Apache port is {{ port }}
-      when: ansible_os_family == "RedHat"
-      lineinfile:
-        path: /etc/httpd/conf/httpd.conf
-        regexp: '^Listen '
-        insertafter: '^#Listen '
-        line: Listen {{ port }}
-      notify: "restart apache"
-
-# Change UBUNTU Listen 80 to Listen {{ port }}        
-    - name: Ensure the default Apache port is {{ port }}
-      when: ansible_os_family == "Debian"
-      lineinfile:
-        path: /etc/apache2/ports.conf
-        regexp: '^Listen '
-        line: Listen {{ port }}
-      notify: "restart apache2"
-
-
-  handlers:
-    - name: "Start httpd service"
-      service:
-        name: httpd
-        state: started
-      when: ansible_os_family == "RedHat"
-
-    - name: "restart apache"
-      service:
-        name: httpd
-        state: restarted
-      when: ansible_os_family == "RedHat"
-
-    - name: "Start apache2 service"
-      service:
-        name: apache2
-        state: started
-      when: ansible_os_family == "Debian"
-
-    - name: "restart apache2"
-      service:
-        name: apache2
-        state: restarted
-      when: ansible_os_family == "Debian"
+  roles:
+    - setup-apache

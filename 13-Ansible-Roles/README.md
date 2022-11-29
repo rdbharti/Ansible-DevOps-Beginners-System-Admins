@@ -162,4 +162,28 @@ handlers:
   ```
 
 
-  
+# Convert a playbook into a Role
+
+- Execute command ` ansible-galaxy init setup-apache `
+- Move to folder `cd setup-apache/ `
+- copy from setup-apache.yaml to Roles folder `setup-apache/`
+  - vars: \ port: 8081 \ to vars/main.yml
+    - ` port: 8082 `
+  - Tasks to tasks/main.yml
+  - Copy /opt/ansible/index.html to files/
+  - Copy taska under handlers: to handlers/main.yml
+  - Update the defaults/main.yml (in-case we miss to add variable value is vars/main.yml)
+    - port: 8080
+
+- To execute the role, we need to create a playbook which will run the role
+
+```yaml
+
+---
+- name: This Playbook will install apache-httpd
+  hosts: all
+  become: true
+  roles:
+    - setup-apache
+
+```

@@ -72,3 +72,25 @@ EDITED
 
 # Using Ansible Vault with Git
 
+- Create a private repository (so it requires password for retrieving data)
+- clone the repository on ansible-control-node
+  - It will promt for username and password
+  - we provide username and password in the url itself in git git url
+    - https://'username':'Personal-access-tokens'@github.com/rdbharti/private-remo-name
+- We will create an Ansible-playbook to test Ansible Vault
+
+```yaml
+
+---
+- name: "Ansible playbook to test ansible vault"
+  hosts: all
+  become: true
+  tasks: 
+    - name: "clone a git repo" # search google: git module in ansible
+      git:
+        repo: https://rdbharti:TOKEN@github.com/rdbharti/gihub-basic-exercise.git
+        dest: /opt/ansadmin/test-vault
+
+```
+
+- The above ansible-playbook will clone 'github.com/rdbharti/gihub-basic-exercise.git' repo to all hosts 

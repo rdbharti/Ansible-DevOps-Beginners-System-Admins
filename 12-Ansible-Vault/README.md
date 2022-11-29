@@ -69,3 +69,6 @@ EDITED
 ` ansible-vault encrypt filename `
 
 - Then set New Vault Password for the file
+
+# Using Ansible Vault with Git
+

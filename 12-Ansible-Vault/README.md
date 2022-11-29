@@ -44,3 +44,22 @@ $ANSIBLE_VAULT;1.1;AES256
 - This command will prompt to put in the file-password
 - Then display the unencrypted contents of the file
 
+## Decrypt an encrypted file
+
+` ansible-vault decrypt filename `
+
+- This command will prompt to put in the file-password
+- Then decrypt the encrypted file
+- Now the file can be vied with cat command
+```console
+
+[ansadmin@ansible-control-node vault]$ ansible-vault decrypt vault-pass.yaml
+Vault password:
+Decryption successful
+
+[ansadmin@ansible-control-node vault]$ cat vault-pass.yaml
+This is an encrypted file
+EDITED
+
+
+```

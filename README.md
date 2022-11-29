@@ -2,6 +2,10 @@
 
 This is my notes of udemy course [Ansible for the DevOps Beginners & System Admins](https://www.udemy.com/course/valaxy-ansible/)
 
+## Course Completion Certificate
+
+![Course Completion Certificate](images/ansible_for_devops_UDEMY.jpg)
+
 - What you'll learn
     - Able to write ansible playbooks and roles
     - Automate regular system administration tasks

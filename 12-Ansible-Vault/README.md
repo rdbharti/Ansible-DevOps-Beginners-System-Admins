@@ -63,3 +63,9 @@ EDITED
 
 
 ```
+
+## Encrypt: an un-encrypted file
+
+` ansible-vault encrypt filename `
+
+- Then set New Vault Password for the file

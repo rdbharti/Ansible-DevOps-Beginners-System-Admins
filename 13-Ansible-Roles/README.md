@@ -24,7 +24,7 @@ After you group your content in roles, you can easily reuse them and share them 
         │   └── test.yml \
         └── vars \
             └── main.yml \
-            
+
 - `defaults` : it contains the default vaules of inputs; inputs which are not provided explicitly in playbook
 - `files` : we can store files in this folder is to be copied. Eg index.html
 - `handlers` : this contains tasks which are executed when called upon by another task.
@@ -34,3 +34,132 @@ After you group your content in roles, you can easily reuse them and share them 
 - `templates` : configuration files according to target hosts os
 - `tests` : It tests whether the role is working fine or not
 - `vars` : to store variables.
+
+## Adding more tasks to playbook : setup-apache.yaml
+
+1. Adding notify and handlers
+   
+```yaml
+
+---
+- name: playbook to install apache httpd
+  hosts: all
+  become: true
+  tasks:
+    - name: "Install httpd on Redhat"
+      yum:
+        name: httpd
+        state: installed
+      when: ansible_os_family == "RedHat"
+      notify: "Start httpd service"
+  
+    - name: "install apache2 on debian"
+      apt:
+        name: apache2
+        state: present
+      when: ansible_os_family == "Debian"
+      notify: "Start apache2 service"
+
+    - name: "COPY index.html"
+      copy:
+        src: /opt/ansible/index.html
+        dest: /var/www/html/
+        mode: 0666
+
+        
+  handlers:
+    - name: "Start httpd service"
+      service:
+        name: httpd
+        state: started
+      when: ansible_os_family == "RedHat"
+
+    - name: "Start apache2 service"
+      service:
+        name: apache2
+        state: started
+      when: ansible_os_family == "Debian"
+
+```
+
+- Now we want to run apache on `port 8081` , we will edit 
+  - In RHEL
+    - `/etc/httpd/conf/httpd.conf` 
+    - and change : Listen 80 to Listen 8081
+  - In Ubuntu/Debian
+    - `/etc/apache2/ports.conf` 
+    - change : Listen 80 to Listen 8081
+- Update: setup-apache.yaml (Search google: update a file in ansible => 'lineinfile module – Manage lines in text files')
+
+```yaml
+
+...
+# Change RHEL Listen 80 to Listen 8081        
+    - name: Ensure the default Apache port is 8081
+      when: ansible_os_family == "RedHat"
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen '
+        insertafter: '^#Listen '
+        line: Listen 8081
+      notify: "restart apache"
+
+# Change UBUNTU Listen 80 to Listen 8081        
+    - name: Ensure the default Apache port is 8081
+      when: ansible_os_family == "Debian"
+      lineinfile:
+        path: /etc/apache2/ports.conf
+        regexp: '^Listen '
+        line: Listen 8081
+      notify: "restart apache2"
+
+handlers:
+    - name: "restart apache"
+      service:
+        name: httpd
+        state: restarted
+      when: ansible_os_family == "RedHat"
+
+    - name: "restart apache2"
+      service:
+        name: apache2
+        state: restarted
+      when: ansible_os_family == "Debian"
+...
+
+```
+
+- Adding a variable for port number
+
+```yaml
+
+- name: playbook to install apache httpd
+  hosts: all
+  become: true
+  vars: 
+    port: 8082
+  tasks:
+...
+
+# Change RHEL Listen 80 to Listen {{ port }}        
+    - name: Ensure the default Apache port is {{ port }}
+      when: ansible_os_family == "RedHat"
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen '
+        insertafter: '^#Listen '
+        line: Listen {{ port }}
+      notify: "restart apache"
+
+# Change UBUNTU Listen 80 to Listen {{ port }}        
+    - name: Ensure the default Apache port is {{ port }}
+      when: ansible_os_family == "Debian"
+      lineinfile:
+        path: /etc/apache2/ports.conf
+        regexp: '^Listen '
+        line: Listen {{ port }}
+      notify: "restart apache2"
+  ```
+
+
+  
